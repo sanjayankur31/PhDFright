@@ -22,28 +22,56 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import datetime
+from config import THESIS_SUBMISSION_DATE, CONFERENCES_DEADLINES
+from config import JOURNAL_DEADLINES, MISC_DEADLINES
 
-SUBMISSION_YEAR = 2017
-SUBMISSION_MONTH = 10
-SUBMISSION_DAY = 1
 
-today = datetime.datetime.today()
-submission_date = datetime.datetime(
-    SUBMISSION_YEAR, SUBMISSION_MONTH, SUBMISSION_DAY)
-days_remaining = (submission_date - today).days
-years_remaining = int(days_remaining/365)
-weeks_remaining = int(days_remaining/7)
-working_days_remaining = int(weeks_remaining*5)
-months_remaining = int(weeks_remaining/4)
+def calculatedeltas(submission_date):
+    """Calculate delta metrics."""
+    today = datetime.datetime.today()
+    print("{0:>30s}: {1:<10d} days".format(
+        "Days remaining", (submission_date - today).days))
+    print("{0:>30s}: {1:<10f} weeks".format(
+        "Weeks remaining", (submission_date - today).days/7.))
+    print("{0:>30s}: {1:<10f} months".format(
+        "Months remaining", (submission_date - today).days/(7.*4.)))
+    print("{0:>30s}: {1:<10f} years".format(
+        "Years remaining", (submission_date - today).days/(365.)))
+    print("{0:>30s}: {1:<10f} days".format(
+        "Working days remaining", 5. * (submission_date - today).days/(7.)))
 
-print("You have a total of {} days left to submit.".format(days_remaining))
 
-if years_remaining < 1:
-    print("That is less than a year!!")
+print("{0:>40s}".format("*** THESIS ***"))
+print()
+print("- {0}: {1:<10s}".format(
+    "Planned submission date", THESIS_SUBMISSION_DATE.ctime()))
+print()
+calculatedeltas(THESIS_SUBMISSION_DATE)
+print("{0:>40s}".format("--------------"))
+print()
 
-print("That is only {} months!".format(months_remaining))
-print("That is only {} weeks!".format(weeks_remaining))
-print("That is really only {} working days!".format(working_days_remaining))
+print("{0:>40s}".format("*** CONFERENCES ***"))
+for conf, deadline in CONFERENCES_DEADLINES.items():
+    print()
+    print("- {0}: {1:<10s}".format(conf, deadline.ctime()))
+    print()
+    calculatedeltas(deadline)
+    print("{0:>40s}".format("--------------"))
 
 print()
-print("So I strongly suggest you get cracking!")
+print("{0:>40s}".format("*** JOURNALS ***"))
+for conf, deadline in JOURNAL_DEADLINES.items():
+    print()
+    print("- {0}: {1:<10s}".format(conf, deadline.ctime()))
+    print()
+    calculatedeltas(deadline)
+    print("{0:>40s}".format("--------------"))
+
+print()
+print("{0:>40s}".format("*** OTHERS ***"))
+for conf, deadline in MISC_DEADLINES.items():
+    print()
+    print("- {0}: {1:<10s}".format(conf, deadline.ctime()))
+    print()
+    calculatedeltas(deadline)
+    print("{0:>40s}".format("--------------"))
