@@ -28,6 +28,7 @@ THESIS_SUBMISSION_DATE = datetime.datetime(2017, 10, 1, 12, 00)
 
 CONFERENCES_DEADLINES = {
     'CNS 2017 in Antwerp': datetime.datetime(2017, 3, 6, 00, 00),
+    'BNA2017 Festival of neuroscience': datetime.datetime(2017, 4, 10, 00, 00)
 }
 
 JOURNAL_DEADLINES = {
@@ -38,4 +39,8 @@ MISC_DEADLINES = {
     datetime.datetime(2017, 3, 6, 00, 00),
     'CNS 2017 Registration':
     datetime.datetime(2017, 5, 18, 00, 00),
+    'BNA2017 Registration':
+    datetime.datetime(2016, 12, 31, 00, 00),
+    'BNA2017 Abstract submission':
+    datetime.datetime(2016, 12, 16, 00, 00)
 }
